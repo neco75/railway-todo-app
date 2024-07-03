@@ -7,6 +7,15 @@
   color: #ffffff;
   display: flex;
   justify-content: space-between;
+
+  h1 {
+    margin: auto 25px;
+  }
+
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
 }
 
 .sign-out-button {

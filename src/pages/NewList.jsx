@@ -4,11 +4,11 @@ import axios from 'axios';
 import { Header } from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import { url } from '../const';
-import './newList.css';
+import './newList.scss';
 
 export const NewList = () => {
   const [cookies] = useCookies();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const handleTitleChange = e => setTitle(e.target.value);
@@ -38,7 +38,7 @@ export const NewList = () => {
         <h2>リスト新規作成</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="new-list-form">
-          <label>タイトル</label>
+          <label htmlFor="new-list-title">タイトル</label>
           <br />
           <input
             type="text"

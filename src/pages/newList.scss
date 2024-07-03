@@ -1,33 +1,30 @@
 @charset "utf-8";
 
-.new-task {
-  width: 1000px;
+.new-list {
+  width: 90%;
   margin: 0 auto;
+  text-align: center;
+  padding-top: 50px;
 }
 
-.new-task-form {
+.new-list-form {
   color: #555555;
 }
 
-.new-task-select-list,
-.new-task-title,
-.new-task-detail {
+.new-list-title {
   width: 300px;
   margin-bottom: 25px;
 }
 
-.new-task-detail {
-  height: 200px;
-}
-
-.new-task-button {
+.new-list-button {
   background-color: #242f9b;
   color: #ffffff;
   width: 80px;
   height: 40px;
   border-radius: 5px;
-}
 
-.error-message {
-  color: #ff3333;
+  &:hover {
+    width: 90px;
+    height: 50px;
+  }
 }

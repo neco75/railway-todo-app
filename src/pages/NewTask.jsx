@@ -3,7 +3,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { url } from '../const';
 import { Header } from '../components/Header';
-import './newTask.css';
+import './newTask.scss';
 import { useNavigate } from 'react-router-dom';
 
 export const NewTask = () => {
@@ -11,6 +11,7 @@ export const NewTask = () => {
   const [lists, setLists] = useState([]);
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
+  const [limitTime, setLimitTime] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [cookies] = useCookies();
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const NewTask = () => {
       title: title,
       detail: detail,
       done: false,
+      limit: `${limitTime}:00Z`,
     };
 
     axios
@@ -52,7 +54,7 @@ export const NewTask = () => {
       .catch(err => {
         setErrorMessage(`リストの取得に失敗しました。${err}`);
       });
-  }, []);
+  }, [cookies.token]);
 
   return (
     <div>
@@ -61,9 +63,10 @@ export const NewTask = () => {
         <h2>タスク新規作成</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="new-task-form">
-          <label>リスト</label>
+          <label htmlFor="task-list">リスト</label>
           <br />
           <select
+            id="task-list"
             onChange={e => handleSelectList(e.target.value)}
             className="new-task-select-list"
           >
@@ -74,20 +77,34 @@ export const NewTask = () => {
             ))}
           </select>
           <br />
-          <label>タイトル</label>
+          <label htmlFor="task-title">タイトル</label>
           <br />
           <input
+            id="task-title"
             type="text"
             onChange={handleTitleChange}
             className="new-task-title"
           />
           <br />
-          <label>詳細</label>
+          <label htmlFor="task-detail">詳細</label>
           <br />
           <textarea
+            id="task-detail"
             type="text"
             onChange={handleDetailChange}
             className="new-task-detail"
+          />
+          <br />
+          <label htmlFor="task-limit">期限</label>
+          <br />
+          <input
+            id="task-limit"
+            type="datetime-local"
+            onChange={e => {
+              setLimitTime(e.target.value);
+              console.log(e.target.value);
+            }}
+            className="new-task-limit"
           />
           <br />
           <button

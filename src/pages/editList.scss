@@ -1,12 +1,27 @@
 @charset "utf-8";
 
 .edit-list {
-  width: 1000px;
-  margin: 0 auto;
+  margin: 80px auto;
+  width: 90%;
+  max-width: 600px;
 }
 
 .edit-list-form {
   color: #555555;
+
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 8px 16px;
+    margin-right: 8px;
+    font-size: 16px;
+  }
 }
 
 .edit-list-title {
@@ -33,4 +48,16 @@
 
 .error-message {
   color: #ff3333;
+}
+
+@media (max-width: 768px) {
+  .edit-list {
+    width: 80%;
+  }
+}
+
+@media (max-width: 320px) {
+  .edit-list {
+    width: 80%;
+  }
 }

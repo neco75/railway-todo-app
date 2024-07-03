@@ -1,16 +1,20 @@
 @charset "utf-8";
 
-.signup {
+.signin {
   width: 500px;
   margin: 0 auto;
 }
-.signup-form {
+
+.signin-form {
   margin: 25px 0;
+}
+
+.email-label,
+.password-label {
   color: #555555;
 }
 
 .email-input,
-.name-input,
 .password-input {
   width: 100%;
   font-size: large;
@@ -18,7 +22,7 @@
   margin-bottom: 25px;
 }
 
-.signup-button {
+.signin-button {
   background-color: #242f9b;
   color: #ffffff;
   width: 100px;
@@ -28,4 +32,16 @@
 
 .error-message {
   color: #ff3333;
+}
+
+@media (max-width: 768px) {
+  .signin {
+    width: 80%;
+  }
+}
+
+@media (max-width: 320px) {
+  .signin {
+    width: 90%;
+  }
 }

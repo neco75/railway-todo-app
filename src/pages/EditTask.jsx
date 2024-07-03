@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { url } from '../const';
 import { useNavigate, useParams } from 'react-router-dom';
-import './editTask.css';
+import './editTask.scss';
 
 export const EditTask = () => {
   const navigate = useNavigate();
@@ -12,17 +12,20 @@ export const EditTask = () => {
   const [cookies] = useCookies();
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
+  const [limitTime, setLimitTime] = useState('');
   const [isDone, setIsDone] = useState();
   const [errorMessage, setErrorMessage] = useState('');
   const handleTitleChange = e => setTitle(e.target.value);
   const handleDetailChange = e => setDetail(e.target.value);
   const handleIsDoneChange = e => setIsDone(e.target.value === 'done');
+  const handleDateChange = e => setLimitTime(e.target.value);
   const onUpdateTask = () => {
     console.log(isDone);
     const data = {
       title: title,
       detail: detail,
       done: isDone,
+      limit: `${limitTime.slice(0, 16)}:00Z`,
     };
 
     axios
@@ -67,11 +70,12 @@ export const EditTask = () => {
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
+        setLimitTime(task.limit);
       })
       .catch(err => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);
       });
-  }, []);
+  }, [listId, taskId, cookies]);
 
   return (
     <div>
@@ -80,7 +84,7 @@ export const EditTask = () => {
         <h2>タスク編集</h2>
         <p className="error-message">{errorMessage}</p>
         <form className="edit-task-form">
-          <label>タイトル</label>
+          <label htmlFor="task-title">タイトル</label>
           <br />
           <input
             type="text"
@@ -89,7 +93,7 @@ export const EditTask = () => {
             value={title}
           />
           <br />
-          <label>詳細</label>
+          <label htmlFor="task-detail">詳細</label>
           <br />
           <textarea
             type="text"
@@ -98,6 +102,15 @@ export const EditTask = () => {
             value={detail}
           />
           <br />
+          <label htmlFor="task-limit">期限</label>
+          <br />
+          <input
+            id="task-limit"
+            type="datetime-local"
+            className="new-task-limit"
+            defaultValue={limitTime.slice(0, 16)}
+            onChange={handleDateChange}
+          />
           <div>
             <input
               type="radio"
